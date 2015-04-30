@@ -1,0 +1,29 @@
+{
+  "name": "s12v/phpque",
+  "type": "library",
+  "description": "Lightweight Disque client",
+  "keywords": ["disque", "message", "queue"],
+  "homepage": "http://github.com/s12v/phpque",
+  "support": {
+    "issues": "https://github.com/s12v/phpque/issues"
+  },
+  "minimum-stability": "alpha",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sergey Novikov",
+      "email": "snov@snov.me"
+    }
+  ],
+  "require": {
+    "php": ">=5.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "S12v\\Phpque\\": "src"
+    }
+  }
+}
