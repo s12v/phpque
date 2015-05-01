@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/s12v/phpque.svg?branch=master)](https://travis-ci.org/s12v/phpque)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/s12v/phpque/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/s12v/phpque/?branch=master)
 
 # phpque
 
