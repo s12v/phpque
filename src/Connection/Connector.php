@@ -5,10 +5,13 @@ namespace S12v\Phpque\Connection;
 class Connector {
 
     /**
-     * @var int
+     * @var float
      */
     protected $timeout;
 
+    /**
+     * @param float $timeout In seconds
+     */
     function __construct($timeout)
     {
         $this->timeout = $timeout ?: ini_get("default_socket_timeout");
@@ -23,10 +26,10 @@ class Connector {
     {
         $node = parse_url($dsn);
         if (!isset($node['host']) || !isset($node['port'])) {
-            throw new DsnException("Invalid url $dsn");
+            throw new DsnException("Invalid url \"$dsn\"");
         }
 
-        return fsockopen($node['host'], $node['port'], $errno, $errstr, $this->timeout);
+        return @fsockopen($node['host'], $node['port'], $errno, $errstr, $this->timeout);
     }
 
 }

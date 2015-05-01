@@ -59,7 +59,7 @@ class Client implements ClientInterface
 
     /**
      * @param string|array $dsns Data source name(s)
-     * @param int $timeout
+     * @param float $timeout In seconds
      */
     public function __construct($dsns, $timeout = null)
     {
@@ -132,7 +132,6 @@ class Client implements ClientInterface
         if (!$this->isConnected) {
             $this->connect();
         }
-
         $request = $this->serializer->serialize($command, $arguments);
         $result = fwrite($this->stream, $request);
         if ($result === false) {
@@ -273,6 +272,14 @@ class Client implements ClientInterface
     public function info()
     {
         return $this->send('INFO');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function ping()
+    {
+        return $this->send('PING');
     }
 
     /**

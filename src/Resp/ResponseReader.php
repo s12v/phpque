@@ -5,7 +5,6 @@ namespace S12v\Phpque\Resp;
 class ResponseReader {
 
     const CRLF = "\r\n";
-    const SIMPLE_STRING_MAX_LENGTH = 2147483647;
 
     public function getResponse($stream)
     {
@@ -34,7 +33,7 @@ class ResponseReader {
      */
     protected function getError($stream)
     {
-        return stream_get_line($stream, self::SIMPLE_STRING_MAX_LENGTH, self::CRLF);
+        return rtrim(fgets($stream), static::CRLF);
     }
 
     /**
@@ -44,7 +43,7 @@ class ResponseReader {
      */
     protected function getSimpleString($stream)
     {
-        return stream_get_line($stream, self::SIMPLE_STRING_MAX_LENGTH, self::CRLF);
+        return rtrim(fgets($stream), static::CRLF);
     }
 
     /**
@@ -53,7 +52,7 @@ class ResponseReader {
      */
     protected function getInteger($stream)
     {
-        return (int)stream_get_line($stream, 64, self::CRLF);
+        return (int)fgets($stream, 64);
     }
 
     /**
@@ -63,16 +62,16 @@ class ResponseReader {
      */
     protected function getBulkString($stream)
     {
-        $length = (int)stream_get_line($stream, 64, self::CRLF);
+        $length = (int)fgets($stream, 64);
         if ($length > 0) {
             $string = fread($stream, $length);
             if ($string === false) {
                 throw new ResponseException("Invalid bulk string");
             }
-            fread($stream, 2); // HHVM workaround
+            fseek($stream, 2, SEEK_CUR);
             return $string;
         } elseif ($length == 0) {
-            fread($stream, 2); // HHVM workaround
+            fseek($stream, 2, SEEK_CUR);
             return '';
         } else {
             return null;
@@ -85,7 +84,7 @@ class ResponseReader {
      */
     protected function getArray($stream)
     {
-        $count = (int)stream_get_line($stream, 64, self::CRLF);
+        $count = (int)fgets($stream, 64);
         if ($count > 0) {
             $results = array();
             for ($i = 0; $i < $count; $i++) {

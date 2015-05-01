@@ -111,6 +111,13 @@ interface ClientInterface {
     public function info();
 
     /**
+     * @return string
+     *
+     * @throws RuntimeException
+     */
+    public function ping();
+
+    /**
      * @return mixed
      *
      * @throws RuntimeException

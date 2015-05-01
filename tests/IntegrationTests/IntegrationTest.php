@@ -1,7 +1,6 @@
 <?php
 
 use S12v\Phpque\Client;
-use S12v\Phpque\Resp\ResponseException;
 
 class IntegrationTest extends \PHPUnit_Framework_TestCase {
 
@@ -12,7 +11,33 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
 
     public function setUp()
     {
-        $this->client = new Client('tcp://127.0.0.1:7711', 1000);
+        $this->client = new Client(
+            array(
+                'tcp://127.0.0.1:7711',
+                'tcp://127.0.0.1:7712', // this server does not exist
+                ),
+            1
+        );
+    }
+
+    /**
+     * @expectedException           S12v\Phpque\Connection\DsnException
+     * @expectedExceptionMessage    Invalid url "aaa"
+     */
+    public function testConnectToInvalidDsn()
+    {
+        $client = new Client('aaa', 1);
+        $client->ping();
+    }
+
+    /**
+     * @expectedException           S12v\Phpque\Connection\ConnectionException
+     * @expectedExceptionMessage    No servers available
+     */
+    public function testConnectToInvalidServer()
+    {
+        $client = new Client('tcp://127.0.0.1:9999', 1);
+        $client->ping();
     }
 
     public function testNodeId()
@@ -20,11 +45,11 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
         $this->assertTrue(strlen($this->client->getNodeId()) > 0, "Connected");
     }
 
-    public function testHello()
+    public function testPing()
     {
-        $helloResponse = $this->client->hello();
+        $response = $this->client->ping();
 
-        $this->assertTrue(is_array($helloResponse));
+        $this->assertEquals('PONG', $response);
     }
 
     public function testNoJob()
