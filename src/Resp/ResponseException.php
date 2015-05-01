@@ -2,7 +2,7 @@
 
 namespace S12v\Phpque\Resp;
 
-use S12v\Phpque\RuntimeException;
+use S12v\Phpque\Exception\RuntimeException;
 
 class ResponseException extends RuntimeException {
 }
