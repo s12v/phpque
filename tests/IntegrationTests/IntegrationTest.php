@@ -66,7 +66,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
         $job = $this->client->getJob("test_queue");
         $this->client->ackJob($job);
 
-        $this->assertEquals($body, unserialize($job->getBody()));
+        $this->assertEquals($body, unserialize($job->getPayload()));
     }
 
     /**

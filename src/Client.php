@@ -23,7 +23,7 @@ class Client implements ClientInterface
     protected $dsns;
 
     /**
-     * @var resource
+     * @var resource|bool
      */
     protected $stream;
 
@@ -176,7 +176,7 @@ class Client implements ClientInterface
     public function addJob($queueName, $job, $msTimeout, array $options = array())
     {
         $arguments = array($queueName, $job, (string)$msTimeout);
-        if ($options) {
+        if (!empty($options)) {
             $arguments = array_merge($arguments, $this->flatten($options));
         }
 
@@ -203,7 +203,7 @@ class Client implements ClientInterface
     {
         $queueNames = (array)$queueNames;
         $arguments = array();
-        if ($options) {
+        if (!empty($options)) {
             $arguments = array_merge($arguments, $this->flatten($options));
         }
         $arguments[] = 'FROM';
@@ -311,7 +311,7 @@ class Client implements ClientInterface
     public function scan($name, $cursor, array $options = array())
     {
         $arguments = array($name, (string)$cursor);
-        if ($options) {
+        if (!empty($options)) {
             $arguments = array_merge($arguments, $this->flatten($options));
         }
 

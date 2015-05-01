@@ -12,9 +12,9 @@ class Connector {
     /**
      * @param float $timeout In seconds
      */
-    function __construct($timeout)
+    public function __construct($timeout)
     {
-        $this->timeout = $timeout ?: ini_get("default_socket_timeout");
+        $this->timeout = $timeout ?: (float)ini_get("default_socket_timeout");
     }
 
     /**

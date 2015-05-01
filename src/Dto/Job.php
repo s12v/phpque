@@ -16,7 +16,7 @@ class Job {
     /**
      * @var string
      */
-    protected $body;
+    protected $payload;
 
     /**
      * @return string
@@ -53,9 +53,9 @@ class Job {
     /**
      * @return string
      */
-    public function getBody()
+    public function getPayload()
     {
-        return $this->body;
+        return $this->payload;
     }
 
     /**
@@ -63,6 +63,6 @@ class Job {
      */
     public function setBody($payload)
     {
-        $this->body = $payload;
+        $this->payload = $payload;
     }
 }
