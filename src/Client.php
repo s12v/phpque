@@ -8,6 +8,7 @@ use S12v\Phpque\Connection\DsnException;
 use S12v\Phpque\Connection\TransportException;
 use S12v\Phpque\Dto\Job;
 use S12v\Phpque\Exception\InvalidArgumentException;
+use S12v\Phpque\Exception\RuntimeException;
 use S12v\Phpque\Mapper\JobMapper;
 use S12v\Phpque\Resp\ResponseException;
 use S12v\Phpque\Resp\ResponseReader;
@@ -57,12 +58,12 @@ class Client implements ClientInterface
     protected $jobMapper;
 
     /**
-     * @param array $dsns Data source names
+     * @param string|array $dsns Data source name(s)
      * @param int $timeout
      */
-    public function __construct(array $dsns, $timeout = null)
+    public function __construct($dsns, $timeout = null)
     {
-        $this->dsns = $dsns;
+        $this->dsns = (array)$dsns;
         $this->connector = new Connector($timeout);
         $this->serializer = new Serializer();
         $this->responseReader = new ResponseReader();
@@ -160,7 +161,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getNodeId()
     {
@@ -171,6 +172,9 @@ class Client implements ClientInterface
         return $this->nodeId;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addJob($queueName, $job, $msTimeout, array $options = array())
     {
         $arguments = array($queueName, $job, (string)$msTimeout);
@@ -181,7 +185,10 @@ class Client implements ClientInterface
         return $this->send('ADDJOB', $arguments);
     }
 
-    public function getJob(array $queueNames, array $options = array())
+    /**
+     * {@inheritdoc}
+     */
+    public function getJob($queueNames, array $options = array())
     {
         if (isset($options['COUNT']) && $options['COUNT'] > 1) {
             throw new InvalidArgumentException("COUNT is greater then 1, use getJobs() instead");
@@ -191,8 +198,12 @@ class Client implements ClientInterface
         return isset($jobs[0]) ? $jobs[0] : null;
     }
 
-    public function getJobs(array $queueNames, array $options = array())
+    /**
+     * {@inheritdoc}
+     */
+    public function getJobs($queueNames, array $options = array())
     {
+        $queueNames = (array)$queueNames;
         $arguments = array();
         if ($options) {
             $arguments = array_merge($arguments, $this->flatten($options));
@@ -204,21 +215,33 @@ class Client implements ClientInterface
         return $this->jobMapper->convertResponsesToJobs($responses);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function ackJobById($jobId)
     {
         return $this->ackJobsByIds(array($jobId));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function ackJobsByIds(array $jobIds)
     {
         return $this->send('ACKJOB', $jobIds);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function ackJob(Job $job)
     {
         return $this->ackJobById($job->getId());
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function ackJobs(array $jobs)
     {
         $jobIds = array_map(function(Job $job) {
@@ -229,19 +252,15 @@ class Client implements ClientInterface
     }
 
     /**
-     * @param string $jobId
-     * @return mixed
-     * @throws RuntimeException
+     * {@inheritdoc}
      */
     public function fastAckById($jobId)
     {
-        $this->fastAckByIds(array($jobId));
+        return $this->fastAckByIds(array($jobId));
     }
 
     /**
-     * @param array $jobIds
-     * @return mixed
-     * @throws RuntimeException
+     * {@inheritdoc}
      */
     public function fastAckByIds(array $jobIds)
     {
@@ -249,8 +268,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * @return string
-     * @throws RuntimeException
+     * {@inheritdoc}
      */
     public function info()
     {
@@ -258,8 +276,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * @return array
-     * @throws RuntimeException
+     * {@inheritdoc}
      */
     public function hello()
     {
@@ -267,9 +284,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * @param $queueName
-     * @return int
-     * @throws RuntimeException
+     * {@inheritdoc}
      */
     public function qLen($queueName)
     {
@@ -277,21 +292,15 @@ class Client implements ClientInterface
     }
 
     /**
-     * @param $job
-     * @return mixed
-     * @throws RuntimeException
+     * {@inheritdoc}
      */
-    public function show($job)
+    public function show($jobId)
     {
         return $this->send('SHOW');
     }
 
     /**
-     * @param string $name
-     * @param int $cursor
-     * @param array $options
-     * @return mixed
-     * @throws RuntimeException
+     * {@inheritdoc}
      */
     public function scan($name, $cursor, array $options = array())
     {

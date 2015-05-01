@@ -5,8 +5,11 @@
         >
 
     <testsuites>
-        <testsuite name="The project's test suite">
-            <directory>./tests</directory>
+        <testsuite name="UnitTests">
+            <directory>./tests/UnitTests</directory>
+        </testsuite>
+        <testsuite name="IntegrationTests">
+            <directory>./tests/IntegrationTests</directory>
         </testsuite>
     </testsuites>
 

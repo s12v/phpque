@@ -53,7 +53,7 @@ class Job {
     /**
      * @return string
      */
-    public function getPayload()
+    public function getBody()
     {
         return $this->body;
     }

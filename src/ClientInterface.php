@@ -3,14 +3,21 @@
 namespace S12v\Phpque;
 
 use S12v\Phpque\Dto\Job;
+use S12v\Phpque\Exception\RuntimeException;
 
 interface ClientInterface {
 
     /**
-     * @param string $queueName
-     * @param string $job
-     * @param int $msTimeout
-     * @param array $options Hash map of optional arguments: { "OPTION1" => "value", "OPTION" }
+     * @return string
+     */
+    public function getNodeId();
+
+    /**
+     * @param string    $queueName
+     * @param string    $job
+     * @param int       $msTimeout
+     * @param array     $options
+     *                  Hash map of optional arguments: { "OPTION1" => "value", "OPTION" }
      *
      * @return mixed
      *
@@ -19,24 +26,28 @@ interface ClientInterface {
     public function addJob($queueName, $job, $msTimeout, array $options = array());
 
     /**
-     * @param string[] $queueNames
-     * @param array $options Hash map of optional arguments: { "OPTION1" => "value", "OPTION" }
+     * @param string|string[]   $queueNames
+     *                          Array or string for single queue
+     * @param array             $options
+     *                          Hash map of optional arguments: { "OPTION1" => "value", "OPTION" }
      *
-     * @return Job|null
+     * @return Job|null Null if there's no job available
      *
      * @throws RuntimeException
      */
-    public function getJob(array $queueNames, array $options = array());
+    public function getJob($queueNames, array $options = array());
 
     /**
-     * @param string[] $queueNames
-     * @param array $options Hash map of optional arguments: { "OPTION1" => "value", "OPTION" }
+     * @param string|string[]   $queueNames
+     *                          Array or string for single queue
+     * @param array             $options
+     *                          Hash map of optional arguments: { "OPTION1" => "value", "OPTION" }
      *
-     * @return Job[]
+     * @return Job[] Empty array if there are no jobs available
      *
      * @throws RuntimeException
      */
-    public function getJobs(array $queueNames, array $options = array());
+    public function getJobs($queueNames, array $options = array());
 
     /**
      * @param string $jobId
@@ -116,18 +127,19 @@ interface ClientInterface {
     public function qLen($queueName);
 
     /**
-     * @param string $job
+     * @param string $jobId
      *
      * @return mixed
      *
      * @throws RuntimeException
      */
-    public function show($job);
+    public function show($jobId);
 
     /**
-     * @param string $name
-     * @param int $cursor
-     * @param array $options Hash map of optional arguments: { "OPTION1" => "value", "OPTION" }
+     * @param string    $name
+     * @param int       $cursor
+     * @param array     $options
+     *                  Hash map of optional arguments: { "OPTION1" => "value", "OPTION" }
      *
      * @return mixed
      *

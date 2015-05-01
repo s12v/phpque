@@ -12,6 +12,7 @@ class JobMapper {
 
     /**
      * @param array|null $response
+     *
      * @return null
      */
     public function convertResponseToJob($response)
@@ -30,6 +31,7 @@ class JobMapper {
 
     /**
      * @param array|null $responses
+     *
      * @return Job[]
      */
     public function convertResponsesToJobs($responses)
