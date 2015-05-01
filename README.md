@@ -27,3 +27,9 @@ $job = $client->getJob(array('test_queue'), array('TIMEOUT' => 100));
 $client->ackJob($job);
 ```
 
+## Development
+
+Run tests:
+```
+./vendor/bin/phpunit
+```
