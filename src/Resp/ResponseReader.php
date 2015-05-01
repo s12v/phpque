@@ -65,14 +65,14 @@ class ResponseReader {
     {
         $length = (int)stream_get_line($stream, 64, self::CRLF);
         if ($length > 0) {
-            $string = stream_get_contents($stream, $length);
+            $string = fread($stream, $length);
             if ($string === false) {
                 throw new ResponseException("Invalid bulk string");
             }
-            fseek($stream, 2, SEEK_CUR);
+            fread($stream, 2); // HHVM workaround
             return $string;
         } elseif ($length == 0) {
-            fseek($stream, 2, SEEK_CUR);
+            fread($stream, 2); // HHVM workaround
             return '';
         } else {
             return null;
