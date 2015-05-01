@@ -84,7 +84,6 @@ class Client implements ClientInterface
 
             $index = array_rand($dsns);
             try {
-                $this->stream = $this->connector->connect($dsns[$index]);
                 if ($this->connectToNode($dsns[$index])) {
                     break;
                 }
