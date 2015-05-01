@@ -9,7 +9,7 @@ Supports PHP 5.3, 5.4, 5.5, 5.6, and HHVM.
 ## Installation
 
 ```
-composer require s12v/phpque --no-dev
+composer require s12v/phpque
 ```
 
 ## Usage
