@@ -17,7 +17,7 @@ class JobMapper {
      */
     public function convertResponseToJob($response)
     {
-        if (!$response) {
+        if (!is_array($response)) {
             return null;
         }
 
@@ -36,7 +36,7 @@ class JobMapper {
      */
     public function convertResponsesToJobs($responses)
     {
-        if (!$responses) {
+        if (!is_array($responses)) {
             return array();
         }
 
