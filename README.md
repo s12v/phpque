@@ -45,7 +45,7 @@ $client->ackJob($job);
 
 ## API
 
-Refer to the Disque documentation: https://github.com/antirez/disque#api
+Refer to the [Disque documentation](https://github.com/antirez/disque#api) and [ClientInterface](https://github.com/s12v/phpque/blob/master/src/ClientInterface.php)
 
 ## Development
 
