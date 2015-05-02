@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/s12v/phpque.svg?branch=master)](https://travis-ci.org/s12v/phpque)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/s12v/phpque/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/s12v/phpque/?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/s12v/phpque/v/stable)](https://packagist.org/packages/s12v/phpque)
 
 # phpque
 
