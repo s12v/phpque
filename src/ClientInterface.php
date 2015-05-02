@@ -1,9 +1,9 @@
 <?php
 
-namespace S12v\Phpque;
+namespace Phpque;
 
-use S12v\Phpque\Dto\Job;
-use S12v\Phpque\Exception\RuntimeException;
+use Phpque\Dto\Job;
+use Phpque\Exception\RuntimeException;
 
 interface ClientInterface {
 

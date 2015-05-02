@@ -1,6 +1,6 @@
 <?php
 
-use S12v\Phpque\Resp\Serializer;
+use Phpque\Resp\Serializer;
 
 class SerializerTest extends \PHPUnit_Framework_TestCase {
 

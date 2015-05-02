@@ -1,18 +1,18 @@
 <?php
 
-namespace S12v\Phpque;
+namespace Phpque;
 
-use S12v\Phpque\Connection\ConnectionException;
-use S12v\Phpque\Connection\Connector;
-use S12v\Phpque\Connection\DsnException;
-use S12v\Phpque\Connection\TransportException;
-use S12v\Phpque\Dto\Job;
-use S12v\Phpque\Exception\InvalidArgumentException;
-use S12v\Phpque\Exception\RuntimeException;
-use S12v\Phpque\Mapper\JobMapper;
-use S12v\Phpque\Resp\ResponseException;
-use S12v\Phpque\Resp\ResponseReader;
-use S12v\Phpque\Resp\Serializer;
+use Phpque\Connection\ConnectionException;
+use Phpque\Connection\Connector;
+use Phpque\Connection\DsnException;
+use Phpque\Connection\TransportException;
+use Phpque\Dto\Job;
+use Phpque\Exception\InvalidArgumentException;
+use Phpque\Exception\RuntimeException;
+use Phpque\Mapper\JobMapper;
+use Phpque\Resp\ResponseException;
+use Phpque\Resp\ResponseReader;
+use Phpque\Resp\Serializer;
 
 class Client implements ClientInterface
 {

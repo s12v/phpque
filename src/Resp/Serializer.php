@@ -1,6 +1,6 @@
 <?php
 
-namespace S12v\Phpque\Resp;
+namespace Phpque\Resp;
 
 class Serializer {
 

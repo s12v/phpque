@@ -1,7 +1,7 @@
 <?php
 
-use S12v\Phpque\Client;
-use S12v\Phpque\Connection\ConnectionException;
+use Phpque\Client;
+use Phpque\Connection\ConnectionException;
 
 require '../vendor/autoload.php';
 

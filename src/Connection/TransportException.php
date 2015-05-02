@@ -1,8 +1,8 @@
 <?php
 
-namespace S12v\Phpque\Connection;
+namespace Phpque\Connection;
 
-use S12v\Phpque\Exception\RuntimeException;
+use Phpque\Exception\RuntimeException;
 
 class TransportException extends RuntimeException {
 }

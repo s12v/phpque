@@ -1,8 +1,8 @@
 <?php
 
-namespace S12v\Phpque\Mapper;
+namespace Phpque\Mapper;
 
-use S12v\Phpque\Dto\Job;
+use Phpque\Dto\Job;
 
 class JobMapper {
 

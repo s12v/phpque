@@ -1,8 +1,8 @@
 <?php
 
-namespace S12v\Phpque\Connection;
+namespace Phpque\Connection;
 
-use S12v\Phpque\Exception\InvalidArgumentException;
+use Phpque\Exception\InvalidArgumentException;
 
 class DsnException extends InvalidArgumentException {
 }

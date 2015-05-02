@@ -1,6 +1,6 @@
 <?php
 
-use S12v\Phpque\Resp\ResponseReader;
+use Phpque\Resp\ResponseReader;
 
 class DeserializerTest extends \PHPUnit_Framework_TestCase {
 

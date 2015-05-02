@@ -1,6 +1,6 @@
 <?php
 
-namespace S12v\Phpque\Dto;
+namespace Phpque\Dto;
 
 class Job {
     /**

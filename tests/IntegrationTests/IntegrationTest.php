@@ -1,6 +1,6 @@
 <?php
 
-use S12v\Phpque\Client;
+use Phpque\Client;
 
 class IntegrationTest extends \PHPUnit_Framework_TestCase {
 
@@ -21,7 +21,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException           S12v\Phpque\Connection\DsnException
+     * @expectedException           Phpque\Connection\DsnException
      * @expectedExceptionMessage    Invalid url "aaa"
      */
     public function testConnectToInvalidDsn()
@@ -31,7 +31,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException           S12v\Phpque\Connection\ConnectionException
+     * @expectedException           Phpque\Connection\ConnectionException
      * @expectedExceptionMessage    No servers available
      */
     public function testConnectToInvalidServer()
@@ -70,7 +70,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException           S12v\Phpque\Resp\ResponseException
+     * @expectedException           Phpque\Resp\ResponseException
      * @expectedExceptionMessage    BADID Invalid Job ID format.
      */
     public function testInvalidJobIdFormat()

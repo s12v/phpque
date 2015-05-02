@@ -1,6 +1,6 @@
 <?php
 
-namespace S12v\Phpque\Connection;
+namespace Phpque\Connection;
 
 class Connector {
 

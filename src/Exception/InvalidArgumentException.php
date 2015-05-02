@@ -1,6 +1,6 @@
 <?php
 
-namespace S12v\Phpque\Exception;
+namespace Phpque\Exception;
 
 class InvalidArgumentException extends \InvalidArgumentException {
 }
